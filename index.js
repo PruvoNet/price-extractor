@@ -8,8 +8,8 @@ var nativeSymbolToCode = JSON.parse(fs.readFileSync(nativeSymbolToCodeFile));
 var codeToSymbol = JSON.parse(fs.readFileSync(codeToSymbolFile));
 var unicodeRegex = /&#(x?[0-9a-fA-F]+);/;
 var regexReplace = /[0-9,\-\.\s]/g;
-var priceRegex = /(\d{1,3}(,?\d{3})*(\.\d+)?)/;
-var priceRegex2 = /(\d{1,3}(\.?\d{3})*(,\d+)?)/;
+var priceRegex = /^(\d{1,3}(,?\d{3})*(\.\d+)?)$/;
+var priceRegex2 = /^(\d{1,3}(\.?\d{3})*(,\d+)?)$/;
 
 module.exports = {
   searchCode: searchCode,
