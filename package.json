@@ -1,6 +1,6 @@
 {
   "name": "price-extractor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Given a price string, extract the price and currency code",
   "main": "index.js",
   "scripts": {
