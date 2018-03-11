@@ -1,15 +1,17 @@
 "use strict";
-var fs = require('fs');
-var symbolToCodeFile = __dirname + '/symbolToCode.json';
-var codeToSymbolFile = __dirname + '/codeToSymbol.json';
-var nativeSymbolToCodeFile = __dirname + '/nativeSymbolToCode.json';
-var symbolToCode = JSON.parse(fs.readFileSync(symbolToCodeFile));
-var nativeSymbolToCode = JSON.parse(fs.readFileSync(nativeSymbolToCodeFile));
-var codeToSymbol = JSON.parse(fs.readFileSync(codeToSymbolFile));
-var unicodeRegex = /&#(x?[0-9a-fA-F]+);/;
-var regexReplace = /[0-9,\-\.\s]/g;
-var priceRegex = /^(\d{1,3}(,?\d{3})*(\.\d+)?)$/;
-var priceRegex2 = /^(\d{1,3}(\.?\d{3})*(,\d+)?)$/;
+
+const fs = require('fs');
+const symbolToCodeFile = __dirname + '/symbolToCode.json';
+const codeToSymbolFile = __dirname + '/codeToSymbol.json';
+const nativeSymbolToCodeFile = __dirname + '/nativeSymbolToCode.json';
+const symbolToCode = JSON.parse(fs.readFileSync(symbolToCodeFile));
+const nativeSymbolToCode = JSON.parse(fs.readFileSync(nativeSymbolToCodeFile));
+const codeToSymbol = JSON.parse(fs.readFileSync(codeToSymbolFile));
+const unicodeRegex = /&#(x?[0-9a-fA-F]+);/;
+const regexReplace = /[0-9,'\-.\s]/g;
+const priceRegex = /^(\d{1,3}(,?\d{3})*(\.\d+)?)$/;
+const priceRegex2 = /^(\d{1,3}(\.?\d{3})*(,\d+)?)$/;
+const priceRegex3 = /^(\d{1,3}('?\d{3})*(.\d+)?)$/;
 
 module.exports = {
   searchCode: searchCode,
@@ -21,8 +23,8 @@ function searchCode(moneyStr, fallbackCode) {
 }
 
 function getPriceNumber(str) {
-  var price;
-  var regex = str.match(priceRegex);
+  let price;
+  let regex = str.match(priceRegex);
   if (regex && regex[0] === str) {
     price = Number(regex[1].replace(/,/g, "").trim());
   }
@@ -32,19 +34,26 @@ function getPriceNumber(str) {
       price = Number(regex[1].replace(/\./g, "").replace(/,/g, ".").trim());
     }
   }
+  if (!price && price !== 0) {
+    regex = str.match(priceRegex3);
+    if (regex && regex[0] === str) {
+      price = Number(regex[1].replace(/'/g, "").trim());
+    }
+  }
   return price;
 }
+
 function searchPriceAndCode(moneyStr, fallbackCode) {
-  var raw = _searchCodeAndStrip(moneyStr, fallbackCode);
-  var code = raw.code;
-  var str = raw.str;
-  var price = getPriceNumber(str);
+  const raw = _searchCodeAndStrip(moneyStr, fallbackCode);
+  const code = raw.code;
+  const str = raw.str;
+  let price = getPriceNumber(str);
   if (!price && price !== 0 && str.match(/\s/)) {
-    var tmpStr = str.replace(/\s/g, '.');
+    const tmpStr = str.replace(/\s/g, '.');
     price = getPriceNumber(tmpStr);
   }
   if (!price && price !== 0 && str.match(/\s/)) {
-    var tmpStr = str.replace(/\s/g, ',');
+    const tmpStr = str.replace(/\s/g, ',');
     price = getPriceNumber(tmpStr);
   }
   if (price || price === 0) {
@@ -54,17 +63,17 @@ function searchPriceAndCode(moneyStr, fallbackCode) {
 }
 
 function _searchCodeAndStrip(moneyStr, fallbackCode) {
-  var res = {};
-  var str = moneyStr;
-  var toCheck = moneyStr;
-  var regex = toCheck.match(unicodeRegex);
+  const res = {};
+  let str = moneyStr;
+  let toCheck = moneyStr;
+  let regex = toCheck.match(unicodeRegex);
   if (regex) {
     str = str.replace(unicodeRegex, '').trim();
-    var code = regex[1].toLowerCase();
+    const code = regex[1].toLowerCase();
     toCheck = String.fromCharCode(code[0] === "x" ? parseInt(code.substr(1), 16) : parseInt(code, 10));
   }
   toCheck = toCheck.replace(regexReplace, "").trim();
-  var code = symbolToCode[toCheck];
+  let code = symbolToCode[toCheck];
   if (code) {
     res.code = code;
     res.str = str.replace(toCheck, '').trim();
