@@ -9,6 +9,15 @@
     "name_plural": "Fijian dollars"
   },
   {
+    "symbol": "VT",
+    "name": "Vanuatu vatu",
+    "symbol_native": "VT",
+    "decimal_digits": 2,
+    "rounding": 0,
+    "code": "VUV",
+    "name_plural": "Vanuatu vatu"
+  },
+  {
     "symbol": "US$",
     "name": "US Dollar",
     "symbol_native": "US$",
