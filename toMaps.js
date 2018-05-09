@@ -40,6 +40,7 @@ fs.readFile(currenciesFile, 'utf8', function (err, data) {
   symbolToCode["A$"] = "AUD";
   symbolToCode["JP¥"] = "JPY";
   symbolToCode["₹"] = "INR";
+  symbolToCode["CFPF"] = "XPF";
   fs.writeFile(symbolToCodeFile, JSON.stringify(symbolToCode, null, 2));
   fs.writeFile(nativeSymbolToCodeFile, JSON.stringify(nativeSymbolToCode, null, 2));
   fs.writeFile(codeToSymbolFile, JSON.stringify(codeToSymbol, null, 2));
