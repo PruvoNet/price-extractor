@@ -7,3 +7,4 @@ console.dir(extractor("1.958,43 NOK"));
 console.dir(extractor("1958,43 NOK"));
 console.dir(extractor("￥732.62"));
 console.dir(extractor("2'425.64 CHF"));
+console.dir(extractor("L410,400"));

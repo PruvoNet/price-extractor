@@ -1062,6 +1062,15 @@
     "name_plural": "South African rand"
   },
   {
+    "symbol": "L",
+    "name": "Swazi Lilangeni",
+    "symbol_native": "L‏",
+    "decimal_digits": 0,
+    "rounding": 0,
+    "code": "SZL",
+    "name_plural": "Swazi Lilangeni"
+  },
+  {
     "symbol": "ZK",
     "name": "Zambian Kwacha",
     "symbol_native": "ZK",

@@ -4,6 +4,8 @@ var symbolToCodeFile = __dirname + '/symbolToCode.json';
 var nativeSymbolToCodeFile = __dirname + '/nativeSymbolToCode.json';
 var codeToSymbolFile = __dirname + '/codeToSymbol.json';
 
+// https://gist.github.com/GoGross/19b254a4210d3d72b3dfc1e808116af3
+
 var _ = require('underscore');
 fs.readFile(currenciesFile, 'utf8', function (err, data) {
   if (err) {
