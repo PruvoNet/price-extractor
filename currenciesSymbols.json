@@ -189,12 +189,12 @@
     "name_plural": "Botswanan pulas"
   },
   {
-    "symbol": "BYR",
+    "symbol": "Br",
     "name": "Belarusian Ruble",
-    "symbol_native": "BYR",
+    "symbol_native": "Br",
     "decimal_digits": 0,
     "rounding": 0,
-    "code": "BYR",
+    "code": "BYN",
     "name_plural": "Belarusian rubles"
   },
   {
@@ -313,15 +313,6 @@
     "rounding": 0,
     "code": "DZD",
     "name_plural": "Algerian dinars"
-  },
-  {
-    "symbol": "Ekr",
-    "name": "Estonian Kroon",
-    "symbol_native": "kr",
-    "decimal_digits": 2,
-    "rounding": 0,
-    "code": "EEK",
-    "name_plural": "Estonian kroons"
   },
   {
     "symbol": "EGP",
@@ -583,24 +574,6 @@
     "rounding": 0,
     "code": "LKR",
     "name_plural": "Sri Lankan rupees"
-  },
-  {
-    "symbol": "Lt",
-    "name": "Lithuanian Litas",
-    "symbol_native": "Lt",
-    "decimal_digits": 2,
-    "rounding": 0,
-    "code": "LTL",
-    "name_plural": "Lithuanian litai"
-  },
-  {
-    "symbol": "Ls",
-    "name": "Latvian Lats",
-    "symbol_native": "Ls",
-    "decimal_digits": 2,
-    "rounding": 0,
-    "code": "LVL",
-    "name_plural": "Latvian lati"
   },
   {
     "symbol": "LD",
@@ -1076,7 +1049,7 @@
     "symbol_native": "ZK",
     "decimal_digits": 0,
     "rounding": 0,
-    "code": "ZMK",
+    "code": "ZMW",
     "name_plural": "Zambian kwachas"
   },
   {

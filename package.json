@@ -1,6 +1,6 @@
 {
   "name": "price-extractor",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Given a price string, extract the price and currency code",
   "main": "index.js",
   "scripts": {
@@ -26,8 +26,7 @@
     "url": "https://github.com/regevbr/price-extractor/issues"
   },
   "homepage": "https://github.com/regevbr/price-extractor#readme",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "underscore": "^1.8.3"
   }
