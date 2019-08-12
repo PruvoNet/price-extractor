@@ -34,6 +34,7 @@ build/Release
 
 # Dependency directories
 node_modules/
+.idea/
 jspm_packages/
 
 # Typescript v1 declaration files
@@ -41,7 +42,8 @@ typings/
 
 # Optional npm cache directory
 .npm
-.idea
+dist
+
 # Optional eslint cache
 .eslintcache
 
@@ -56,4 +58,3 @@ typings/
 
 # dotenv environment variables file
 .env
-
