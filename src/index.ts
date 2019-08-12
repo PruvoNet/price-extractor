@@ -71,10 +71,10 @@ const searchCodeAndStrip = (moneyStr: string, fallbackCode?: string): ICodeResul
         code = undefined;
     }
     if (code) {
-        return {code, str: str.replace(toCheck, '').trim(),};
+        return {code, str: str.replace(toCheck, '').trim()};
     }
     if (toCheck in codeToSymbol) {
-        return {code: toCheck, str: str.replace(toCheck, '').trim(),};
+        return {code: toCheck, str: str.replace(toCheck, '').trim()};
     }
     return {str: moneyStr};
 };
