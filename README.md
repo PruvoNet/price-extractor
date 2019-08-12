@@ -9,36 +9,23 @@
 # price-extractor
 
 A small library for parsing price strings in order to extract the price as a number and the currency code of the price.  
-The library can handle all kinds of thousands and cents delimiters, as well as all currency unicodes.
+The library can handle all kinds of thousands and cents delimiters, as well as all currency native symbols and unicodes.
 
-Examples
----------
-```javascript
-const extractor = require("price-extractor").searchPriceAndCode;
-console.dir(extractor("99,01€"));
-// { price: 99.01, code: 'EUR' }
+## Installation 
+```sh
+npm install price-extractor
+```
+Or
+```sh
+yarn add price-extractor
 ```
 
-```javascript
-const extractor = require("price-extractor").searchPriceAndCode;
-console.dir(extractor("ARS 1,647.86"));
-// { price: 1647.86, code: 'ARS' }
-```
-
-```javascript
-const extractor = require("price-extractor").searchPriceAndCode;
-console.dir(extractor("1.958,43 NOK"));
-// { price: 1958.43, code: 'NOK' }
-```
-
-```javascript
-const extractor = require("price-extractor").searchPriceAndCode;
-console.dir(extractor("￥732.62"));
-// { price: 732.62, code: 'JPY' }
-```
-
-```javascript
-const extractor = require("price-extractor").searchPriceAndCode;
-console.dir(extractor("2'425.64 CHF"));
-// { price: 2425.64, code: 'CHF' }
+## Examples
+```typescript
+import {searchPriceAndCode} from 'price-extractor';
+console.dir(searchPriceAndCode('99,01€')); // { price: 99.01, code: 'EUR' }
+console.dir(searchPriceAndCode('ARS 1,647.86')); // { price: 1647.86, code: 'ARS' }
+console.dir(searchPriceAndCode('1.958,43 NOK')); // { price: 1958.43, code: 'NOK' }
+console.dir(searchPriceAndCode('￥732.62')); // { price: 732.62, code: 'JPY' }
+console.dir(searchPriceAndCode('2\'425.64 CHF')); // { price: 2425.64, code: 'CHF' }
 ```
