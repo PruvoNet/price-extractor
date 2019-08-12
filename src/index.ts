@@ -61,36 +61,22 @@ const searchCodeAndStrip = (moneyStr: string, fallbackCode?: string): ICodeResul
         if (toCheck.indexOf('$') === 0 && toCheck.length > 1) {
             str = str.replace(toCheck.substr(1), '').replace('$', '').trim();
         }
-        return {
-            code,
-            str,
-        };
+        return {code, str};
     }
     code = nativeSymbolToCode[toCheck];
     if (code === '_____') {
         if (fallbackCode) {
             return searchCodeAndStrip(str.replace(toCheck, fallbackCode).trim());
-        } else {
-            code = undefined;
         }
+        code = undefined;
     }
     if (code) {
-        str = str.replace(toCheck, '').trim();
-        return {
-            code,
-            str,
-        };
+        return {code, str: str.replace(toCheck, '').trim(),};
     }
     if (toCheck in codeToSymbol) {
-        str = str.replace(toCheck, '').trim();
-        return {
-            code: toCheck,
-            str,
-        };
+        return {code: toCheck, str: str.replace(toCheck, '').trim(),};
     }
-    return {
-        str: moneyStr,
-    };
+    return {str: moneyStr};
 };
 
 export interface IExtractResult {
