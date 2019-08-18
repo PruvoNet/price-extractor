@@ -165,4 +165,10 @@ describe('price extractor', () => {
         expect(res.price).to.eql(1647.86);
     });
 
+    it('should parse usd properly', () => {
+        const res = searchPriceAndCode('$515.37');
+        expect(res.code).to.eql('USD');
+        expect(res.price).to.eql(515.37);
+    });
+
 });
