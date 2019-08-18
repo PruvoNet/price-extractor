@@ -54,6 +54,15 @@
     "name_plural": "UAE dirhams"
   },
   {
+    "symbol": "C$",
+    "name": "Nicaraguan Córdoba",
+    "symbol_native": "C$",
+    "decimal_digits": 2,
+    "rounding": 0,
+    "code": "NIO",
+    "name_plural": "Nicaraguan córdobas"
+  },
+  {
     "symbol": "Af",
     "name": "Afghan Afghani",
     "symbol_native": "؋",
