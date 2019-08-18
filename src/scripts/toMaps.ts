@@ -49,6 +49,7 @@ _.map(currencies, (currency) => {
 });
 delete nativeSymbolToCode.$;
 delete symbolToCode.Br;
+symbolToCode.$ = 'USD';
 nativeSymbolToCode.kr = '_____';
 nativeSymbolToCode.C$ = '_____';
 nativeSymbolToCode.Br = '_____';
