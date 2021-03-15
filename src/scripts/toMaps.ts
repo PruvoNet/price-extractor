@@ -9,8 +9,8 @@ const symbolToCodeFile = path.join(__dirname, '..', '..', 'src', 'symbolToCode.j
 const nativeSymbolToCodeFile = path.join(__dirname, '..', '..', 'src', 'nativeSymbolToCode.json');
 const codeToSymbolFile = path.join(__dirname, '..', '..', 'src', 'codeToSymbol.json');
 
-// original list was taken from https://gist.github.com/GoGross/19b254a4210d3d72b3dfc1e808116af3
-
+// original list was taken from https://gist.github.com/Fluidbyte/2973986 and https://www.thefinancials.com/Default.aspx?SubSectionID=curformat
+// and https://en.wikipedia.org/wiki/Decimal_separator
 interface ICurrency {
     'symbol': string;
     'name': string;
@@ -19,22 +19,24 @@ interface ICurrency {
     'rounding': number;
     'code': string;
     'name_plural': string;
+    'decimal_separator'?: string;
 }
 
 type Json = Record<string, string | undefined>;
 
-const currencies: ICurrency[] = currenciesFileRaw;
+const currencies: Record<string, ICurrency> = currenciesFileRaw;
 const symbolToCode: Json = {};
 const codeToSymbol: Json = {};
 const nativeSymbolToCode: Json = {};
-_.map(currencies, (currency) => {
-    if (symbolToCode[currency.symbol]) {
+_.each(currencies, (currency) => {
+    if (symbolToCode[currency.symbol] && currency.symbol !== 'Br') {
         console.log('symbolToCode');
         console.log(symbolToCode[currency.symbol]);
         console.log(currency.symbol);
     }
     symbolToCode[currency.symbol] = currency.code;
-    if (nativeSymbolToCode[currency.symbol_native]) {
+    if (nativeSymbolToCode[currency.symbol_native]
+        && currency.symbol_native !== '$' && currency.symbol_native !== 'kr') {
         console.log('nativeSymbolToCode');
         console.log(nativeSymbolToCode[currency.symbol_native]);
         console.log(currency.symbol_native);
@@ -48,11 +50,11 @@ _.map(currencies, (currency) => {
     codeToSymbol[currency.code] = currency.symbol;
 });
 delete nativeSymbolToCode.$;
+nativeSymbolToCode.kr = '_____';
+nativeSymbolToCode.Br = '_____';
+nativeSymbolToCode.C$ = '_____';
 delete symbolToCode.Br;
 symbolToCode.$ = 'USD';
-nativeSymbolToCode.kr = '_____';
-nativeSymbolToCode.C$ = '_____';
-nativeSymbolToCode.Br = '_____';
 symbolToCode.$CAD = 'CAD';
 symbolToCode.A$ = 'AUD';
 symbolToCode['JP¥'] = 'JPY';
