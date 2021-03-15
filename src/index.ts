@@ -3,37 +3,58 @@
 import * as symbolToCodeRaw from './symbolToCode.json';
 import * as nativeSymbolToCodeRaw from './nativeSymbolToCode.json';
 import * as codeToSymbolRaw from './codeToSymbol.json';
+import * as currenciesFileRaw from './currenciesSymbols.json';
 
 type Json = Record<string, string | undefined>;
 
+interface ICurrency {
+    'symbol': string;
+    'name': string;
+    'symbol_native': string;
+    'decimal_digits': number;
+    'rounding': number;
+    'code': string;
+    'name_plural': string;
+    'decimal_separator'?: string;
+}
+
+const currencies: Record<string, ICurrency | undefined> = currenciesFileRaw;
 const symbolToCode: Json = symbolToCodeRaw;
 const nativeSymbolToCode: Json = nativeSymbolToCodeRaw;
 const codeToSymbol: Json = codeToSymbolRaw;
 
-// List of formats - https://www.thefinancials.com/Default.aspx?SubSectionID=curformat
-
 const unicodeRegex = /&#(x?[0-9a-fA-F]+);/;
-const regexReplace = /[0-9,'\-.\s]/g;
-const priceRegex = /^(\d{1,3}(,?\d{3})*(\.\d{1,2})?)$/;
-const priceRegex2 = /^(\d{1,3}(\.?\d{3})*(,\d{1,2})?)$/;
-const priceRegex3 = /^(\d{1,3}('?\d{3})*(\.\d{1,2})?)$/;
+const regexReplace = /[0-9,'_\-.\s]/g;
+const dotDecimalRegex = /^(\d{1,3}(,?\d{3})*(\.\d{1,2})?)$/; // dot decimal separator
+const longDotDecimalRegex = /^(\d{1,3}(,?\d{3})*(\.\d{1,3})?)$/; // dot decimal separator
+const commaDecimalRegex = /^(\d{1,3}(\.?\d{3})*(,\d{1,2})?)$/; // comma decimal separator
+const longCommaDecimalRegex = /^(\d{1,3}(\.?\d{3})*(,\d{1,3})?)$/; // comma decimal separator
 
-const getPriceNumber = (str: string): number => {
+const getPriceNumber = (str: string, currency: ICurrency | undefined): number => {
     let price: number = Number.NaN;
-    let regex = str.match(priceRegex);
-    if (regex && regex[0] === str) {
-        price = parseFloat(regex[1].replace(/,/g, '').trim());
-    }
-    if (isNaN(price)) {
-        regex = str.match(priceRegex2);
-        if (regex && regex[0] === str) {
-            price = parseFloat(regex[1].replace(/\./g, '').replace(/,/g, '.').trim());
+    let match: RegExpMatchArray | null;
+    if (currency && currency.decimal_digits === 3) {
+        if (currency.decimal_separator === ',') {
+            match = str.match(longCommaDecimalRegex);
+            if (match && match[0] === str) {
+                price = parseFloat(match[1].replace(/\./g, '').replace(/,/g, '.').trim());
+            }
+        } else {
+            match = str.match(longDotDecimalRegex);
+            if (match && match[0] === str) {
+                price = parseFloat(match[1].replace(/,/g, '').trim());
+            }
         }
-    }
-    if (isNaN(price)) {
-        regex = str.match(priceRegex3);
-        if (regex && regex[0] === str) {
-            price = parseFloat(regex[1].replace(/'/g, '').trim());
+    } else {
+        match = str.match(dotDecimalRegex);
+        if (match && match[0] === str) {
+            price = parseFloat(match[1].replace(/,/g, '').trim());
+        }
+        if (isNaN(price)) {
+            match = str.match(commaDecimalRegex);
+            if (match && match[0] === str) {
+                price = parseFloat(match[1].replace(/\./g, '').replace(/,/g, '.').trim());
+            }
         }
     }
     return price;
@@ -95,16 +116,9 @@ export const searchCode = (moneyStr: string, fallbackCode?: string): string | un
 export const searchPriceAndCode = (moneyStr: string, fallbackCode?: string): IExtractResult => {
     const raw = searchCodeAndStrip(moneyStr, fallbackCode);
     const code = raw.code;
-    const str = raw.str;
-    let price = getPriceNumber(str);
-    if (isNaN(price) && str.match(/\s/)) {
-        const tmpStr = str.replace(/\s/g, '.');
-        price = getPriceNumber(tmpStr);
-    }
-    if (isNaN(price) && str.match(/\s/)) {
-        const tmpStr = str.replace(/\s/g, ',');
-        price = getPriceNumber(tmpStr);
-    }
+    // Remove custom thousands separator
+    const str = raw.str.replace(/\s/g, '').replace(/'/g, '').replace(/_/g, '');
+    const price = getPriceNumber(str, currencies[code || 'foo']);
     if (price || price === 0) {
         return {price, code};
     }

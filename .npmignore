@@ -35,7 +35,6 @@ CONTRIBUTING.md
 dist/test/
 dist/example/
 dist/scripts/
-dist/currenciesSymbols.json
 # config files
 tslint.json
 .gitignore

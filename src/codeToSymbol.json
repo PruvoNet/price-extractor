@@ -30,6 +30,7 @@
   "DKK": "Dkr",
   "DOP": "RD$",
   "DZD": "DA",
+  "EEK": "Ekr",
   "EGP": "EGP",
   "ERN": "Nfk",
   "ETB": "Br",
@@ -61,6 +62,8 @@
   "KZT": "KZT",
   "LBP": "LB£",
   "LKR": "SLRs",
+  "LTL": "Lt",
+  "LVL": "Ls",
   "LYD": "LD",
   "MAD": "MAD",
   "MDL": "MDL",
@@ -117,5 +120,6 @@
   "XPF": "₣",
   "YER": "YR",
   "ZAR": "R",
-  "ZMW": "ZK"
+  "ZMW": "ZK",
+  "ZWL": "ZWL$"
 }
