@@ -1,8 +1,9 @@
 [![Npm Version](https://img.shields.io/npm/v/price-extractor.svg?style=popout)](https://www.npmjs.com/package/price-extractor)
 [![node](https://img.shields.io/node/v-lts/price-extractor)](https://www.npmjs.com/package/price-extractor)
-[![Build status](https://github.com/PruvoNet/price-extractorl/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/regevbr/json-expression-eval/actions/workflows/ci.yml)
+[![Build status](https://github.com/PruvoNet/price-extractor/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/PruvoNet/price-extractor/actions/workflows/ci.yml)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/83a4b9446725afb8f6ef/test_coverage)](https://codeclimate.com/github/PruvoNet/price-extractor/test_coverage)
 [![Maintainability](https://api.codeclimate.com/v1/badges/83a4b9446725afb8f6ef/maintainability)](https://codeclimate.com/github/PruvoNet/price-extractor/maintainability)
+[![Known Vulnerabilities](https://snyk.io/test/github/PruvoNet/price-extractor/badge.svg?targetFile=package.json)](https://snyk.io/test/github/PruvoNet/price-extractor?targetFile=package.json)
 
 # price-extractor
 
