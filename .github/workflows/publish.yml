@@ -55,8 +55,5 @@ jobs:
           yarn build
 
       - name: Publish
-        env:
-          # Logs the OIDC token exchange with the registry.
-          NPM_CONFIG_LOGLEVEL: verbose
         run: |
           npm publish
