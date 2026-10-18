@@ -1,11 +1,11 @@
 {
   "name": "price-extractor",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Given a price string, extract the price and currency code",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "engines": {
-    "node": "^6 || ^8 || ^10 || ^12 || ^14 || ^16 || ^18"
+    "node": "^6 || ^8 || ^10 || ^12 || ^14 || ^16 || ^18 || ^20 || ^22 || ^24"
   },
   "scripts": {
     "test": "npm run lint && npm run test:cover",
