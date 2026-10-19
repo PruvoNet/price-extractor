@@ -8,6 +8,9 @@ on:
     branches:
       - '**'
   workflow_call:
+    secrets:
+      SNYK_TOKEN:
+        required: false
 
 permissions:
   contents: read
@@ -29,6 +32,8 @@ jobs:
 
       - uses: actions/checkout@v5
         name: Checkout
+        with:
+          persist-credentials: false
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v6
